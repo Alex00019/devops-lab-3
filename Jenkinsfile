@@ -4,11 +4,7 @@ pipeline {
     stages {
         stage('Deploy to Kubernetes') {
             steps {
-                withKubeConfig([
-                    credentialsId: 'kubernetes-creds',
-                    serverUrl: 'https://172.19.32.1:38573',
-                    namespace: 'demo'
-                ]) {
+                withKubeConfig([credentialsId: 'kubernetes-creds']) {
                     sh 'helm upgrade --install demo microservices/msvc-chart --namespace demo'
                 }
             }
